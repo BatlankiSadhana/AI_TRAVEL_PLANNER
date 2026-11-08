@@ -1,0 +1,116 @@
+
+{% extends "base.html" %}
+
+{% block title %}Plan Your Trip | Voyago{% endblock %}
+
+{% block content %}
+
+<section class="form-page">
+
+    <div class="form-heading">
+        <span class="section-label">LET'S PLAN SOMETHING AMAZING</span>
+        <h1>Design your <span>journey.</span></h1>
+        <p>Tell us what you love. We'll help you plan the perfect getaway.</p>
+    </div>
+
+    <div class="planner-card">
+
+        <div class="planner-card-header">
+            <div>
+                <span class="section-label">YOUR TRAVEL DETAILS</span>
+                <h2>Plan your adventure</h2>
+            </div>
+            <span class="planner-icon">✈</span>
+        </div>
+
+        <form action="{{ url_for('plan_trip') }}" method="POST">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="starting_location">Starting Location</label>
+                    <input
+                        type="text"
+                        id="starting_location"
+                        name="starting_location"
+                        placeholder="e.g. Hyderabad"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="destination">Destination</label>
+                    <select id="destination" name="destination" required>
+                        <option value="">Choose destination</option>
+                        <option>Goa</option>
+                        <option>Ooty</option>
+                        <option>Manali</option>
+                        <option>Jaipur</option>
+                        <option>Kerala</option>
+                        <option>Vizag</option>
+                        <option>Araku</option>
+                        <option>Hyderabad</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="days">Trip Duration</label>
+                    <input
+                        type="number"
+                        id="days"
+                        name="days"
+                        min="1"
+                        max="30"
+                        placeholder="Number of days"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="travelers">Number of Travellers</label>
+                    <input
+                        type="number"
+                        id="travelers"
+                        name="travelers"
+                        min="1"
+                        max="50"
+                        value="2"
+                        required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="budget">Total Trip Budget (₹)</label>
+                    <input
+                        type="number"
+                        id="budget"
+                        name="budget"
+                        min="1"
+                        placeholder="Enter your total budget"
+                        required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="preference">Your Travel Preference</label>
+                    <select id="preference" name="preference" required>
+                        <option value="Nature">Nature & Scenic Views</option>
+                        <option value="Adventure">Adventure & Activities</option>
+                        <option value="Culture">Culture & Heritage</option>
+                        <option value="Relaxation">Relaxation & Leisure</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button type="submit" class="primary-button submit-button">
+                Generate My Itinerary <span>↗</span>
+            </button>
+
+            <p class="form-note">
+                ✦ Your personalized travel plan will be generated instantly.
+            </p>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

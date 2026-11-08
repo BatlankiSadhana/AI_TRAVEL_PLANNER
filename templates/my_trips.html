@@ -1,0 +1,88 @@
+
+{% extends "base.html" %}
+
+{% block title %}My Trips | Voyago{% endblock %}
+
+{% block content %}
+
+<section class="my-trips-page">
+
+    <div class="dashboard-welcome">
+        <div>
+            <span class="section-label">YOUR TRAVEL MEMORIES</span>
+            <h1>My <span>journeys.</span></h1>
+            <p>All your planned adventures, together in one place.</p>
+        </div>
+
+        <a href="{{ url_for('plan_trip') }}" class="primary-button">
+            + Plan New Trip
+        </a>
+    </div>
+
+    {% if trips %}
+
+    <div class="saved-trips-grid">
+
+        {% for trip in trips %}
+
+        <article class="saved-trip-card">
+
+            <div class="saved-trip-top">
+                <span class="saved-trip-label">SAVED JOURNEY</span>
+                <span class="saved-trip-number">
+                    #{{ "%03d"|format(trip.id) }}
+                </span>
+            </div>
+
+            <div class="saved-trip-icon">✈</div>
+
+            <h2>{{ trip.destination }}</h2>
+
+            <p class="saved-trip-route">
+                {{ trip.starting_location }} → {{ trip.destination }}
+            </p>
+
+            <div class="saved-trip-meta">
+                <div>
+                    <span>Duration</span>
+                    <strong>{{ trip.days }} Days</strong>
+                </div>
+
+                <div>
+                    <span>Travellers</span>
+                    <strong>{{ trip.travelers }}</strong>
+                </div>
+
+                <div>
+                    <span>Budget</span>
+                    <strong>₹{{ "{:,.0f}".format(trip.budget) }}</strong>
+                </div>
+            </div>
+
+            <a href="{{ url_for('itinerary', trip_id=trip.id) }}"
+               class="saved-trip-button">
+                View Itinerary <span>↗</span>
+            </a>
+
+        </article>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-state">
+        <div class="empty-icon">◇</div>
+        <h3>No saved journeys yet</h3>
+        <p>Your next adventure is waiting to be planned.</p>
+        <a href="{{ url_for('plan_trip') }}" class="primary-button">
+            Create Your First Trip ↗
+        </a>
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

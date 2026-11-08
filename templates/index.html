@@ -1,0 +1,125 @@
+
+{% extends "base.html" %}
+
+{% block title %}Voyago | Discover Your Next Journey{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            <span class="eyebrow-line"></span>
+            YOUR JOURNEY BEGINS HERE
+        </div>
+
+        <h1>
+            The world is yours<br>
+            <span>to discover.</span>
+        </h1>
+
+        <p class="hero-description">
+            Discover beautiful destinations, create personalized
+            itineraries and plan unforgettable journeys with Voyago.
+        </p>
+
+        <div class="hero-actions">
+            <a href="{{ url_for('plan_trip') }}" class="primary-button">
+                Plan Your Journey <span>↗</span>
+            </a>
+
+            <a href="#experiences" class="secondary-button">
+                Explore More
+            </a>
+        </div>
+
+        <div class="hero-stats">
+            <div>
+                <h3>08+</h3>
+                <p>Destinations</p>
+            </div>
+
+            <div class="stat-divider"></div>
+
+            <div>
+                <h3>100%</h3>
+                <p>Personalized Plans</p>
+            </div>
+
+            <div class="stat-divider"></div>
+
+            <div>
+                <h3>24/7</h3>
+                <p>Plan Anytime</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="hero-bottom">
+        <span>SCROLL TO EXPLORE</span>
+        <span>↓</span>
+    </div>
+
+</section>
+
+<section class="intro-section" id="experiences">
+
+    <div class="section-heading">
+        <span class="section-label">TRAVEL WITHOUT LIMITS</span>
+
+        <h2>
+            Every journey has<br>
+            <span>a beautiful story.</span>
+        </h2>
+
+        <p>
+            Whether you dream of peaceful mountains, beautiful beaches
+            or historic cities, your next adventure starts here.
+        </p>
+    </div>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <span class="feature-number">01</span>
+            <div class="feature-icon">✧</div>
+            <h3>Smart Planning</h3>
+            <p>Get personalized travel recommendations based on your interests.</p>
+        </div>
+
+        <div class="feature-card">
+            <span class="feature-number">02</span>
+            <div class="feature-icon">◇</div>
+            <h3>Budget Friendly</h3>
+            <p>Organize your travel expenses with a clear budget breakdown.</p>
+        </div>
+
+        <div class="feature-card">
+            <span class="feature-number">03</span>
+            <div class="feature-icon">✦</div>
+            <h3>Perfect Itinerary</h3>
+            <p>Explore a day-wise schedule designed for your trip.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="cta-section">
+
+    <div>
+        <span class="section-label">READY FOR AN ADVENTURE?</span>
+        <h2>Your next chapter<br>starts with a trip.</h2>
+    </div>
+
+    <a href="{{ url_for('plan_trip') }}" class="primary-button">
+        Create My Trip ↗
+    </a>
+
+</section>
+
+{% endblock %}

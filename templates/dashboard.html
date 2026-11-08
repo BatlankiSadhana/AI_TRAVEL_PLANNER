@@ -1,0 +1,100 @@
+
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Voyago{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-page">
+
+    <div class="dashboard-welcome">
+        <div>
+            <span class="section-label">YOUR TRAVEL SPACE</span>
+            <h1>Welcome to your <span>journey.</span></h1>
+            <p>Every great adventure begins with a beautiful plan.</p>
+        </div>
+
+        <a href="{{ url_for('plan_trip') }}" class="primary-button">
+            + Create New Trip
+        </a>
+    </div>
+
+    <div class="dashboard-stats">
+
+        <div class="stat-card">
+            <div class="stat-icon">✈</div>
+            <span>Total Trips</span>
+            <h2>{{ total_trips }}</h2>
+            <p>Your saved travel plans</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">₹</div>
+            <span>Total Planned Budget</span>
+            <h2>₹{{ "{:,.0f}".format(total_budget) }}</h2>
+            <p>Across all your trips</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">◎</div>
+            <span>Destinations</span>
+            <h2>08</h2>
+            <p>Ready to explore</p>
+        </div>
+
+    </div>
+
+    <div class="dashboard-content">
+
+        <div class="dashboard-section-heading">
+            <div>
+                <span class="section-label">YOUR COLLECTION</span>
+                <h2>Recent trips</h2>
+            </div>
+
+            <a href="{{ url_for('my_trips') }}" class="text-link">
+                View all →
+            </a>
+        </div>
+
+        {% if recent_trips %}
+
+        <div class="recent-trip-list">
+            {% for trip in recent_trips %}
+            <a href="{{ url_for('itinerary', trip_id=trip.id) }}"
+               class="recent-trip">
+
+                <div class="recent-trip-icon">✦</div>
+
+                <div class="recent-trip-info">
+                    <h3>{{ trip.destination }}</h3>
+                    <p>{{ trip.starting_location }} · {{ trip.days }} days</p>
+                </div>
+
+                <div class="recent-trip-budget">
+                    ₹{{ "{:,.0f}".format(trip.budget) }}
+                </div>
+
+                <span class="trip-arrow">↗</span>
+            </a>
+            {% endfor %}
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+            <div class="empty-icon">✈</div>
+            <h3>Your travel story starts here</h3>
+            <p>You haven't created any trips yet. Plan your first adventure!</p>
+            <a href="{{ url_for('plan_trip') }}" class="primary-button">
+                Plan My First Trip ↗
+            </a>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

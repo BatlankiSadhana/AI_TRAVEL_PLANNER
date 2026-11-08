@@ -1,0 +1,138 @@
+
+{% extends "base.html" %}
+
+{% block title %}Your Itinerary | Voyago{% endblock %}
+
+{% block content %}
+
+<section class="itinerary-page">
+
+    <div class="itinerary-heading">
+        <span class="section-label">YOUR PERSONALIZED TRAVEL PLAN</span>
+        <h1>Your journey to <span>{{ trip.destination }}.</span></h1>
+        <p>{{ trip.description }}</p>
+    </div>
+
+    <div class="trip-summary">
+
+        <div class="summary-card">
+            <span>FROM</span>
+            <h3>{{ trip.starting_location }}</h3>
+        </div>
+
+        <div class="summary-card">
+            <span>DURATION</span>
+            <h3>{{ trip.days }} Days</h3>
+        </div>
+
+        <div class="summary-card">
+            <span>TRAVELLERS</span>
+            <h3>{{ trip.travelers }} People</h3>
+        </div>
+
+        <div class="summary-card">
+            <span>TOTAL BUDGET</span>
+            <h3>₹{{ "{:,.2f}".format(trip.total_budget) }}</h3>
+        </div>
+
+    </div>
+
+    <div class="itinerary-layout">
+
+        <div class="daily-plans">
+
+            <div class="content-heading">
+                <span class="section-label">YOUR ADVENTURE</span>
+                <h2>Day-wise itinerary</h2>
+            </div>
+
+            {% for day in trip.itinerary %}
+
+            <div class="day-card">
+
+                <div class="day-number">
+                    <span>DAY</span>
+                    <strong>{{ "%02d"|format(day.day) }}</strong>
+                </div>
+
+                <div class="day-details">
+
+                    <h3>{{ day.title }}</h3>
+                    <p>{{ day.description }}</p>
+
+                    <div class="activity">
+                        <span>☀ Morning</span>
+                        <strong>{{ day.morning }}</strong>
+                    </div>
+
+                    <div class="activity">
+                        <span>◈ Afternoon</span>
+                        <strong>{{ day.afternoon }}</strong>
+                    </div>
+
+                    <div class="activity">
+                        <span>☾ Evening</span>
+                        <strong>{{ day.evening }}</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <aside class="budget-panel">
+
+            <span class="section-label">FINANCIAL OVERVIEW</span>
+            <h2>Budget breakdown</h2>
+
+            <div class="budget-total">
+                <span>Estimated trip budget</span>
+                <h2>₹{{ "{:,.2f}".format(trip.total_budget) }}</h2>
+                <p>₹{{ "{:,.2f}".format(trip.budget_per_person) }} per person</p>
+            </div>
+
+            {% for category, amount in trip.budget_breakdown.items() %}
+
+            <div class="budget-item">
+                <div>
+                    <span>{{ category }}</span>
+                    <strong>₹{{ "{:,.2f}".format(amount) }}</strong>
+                </div>
+
+                <div class="budget-track">
+                    <div class="budget-fill"
+                         style="width: {{ (amount / trip.total_budget * 100)|round(1) }}%">
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+            <div class="tips-panel">
+                <h3>Travel tips ✦</h3>
+
+                {% for tip in trip.tips %}
+                <p>✓ {{ tip }}</p>
+                {% endfor %}
+            </div>
+
+        </aside>
+
+    </div>
+
+    <div class="itinerary-actions">
+        <a href="{{ url_for('plan_trip') }}" class="primary-button">
+            Plan Another Trip ↗
+        </a>
+
+        <button onclick="window.print()" class="secondary-dark-button">
+            Print Itinerary
+        </button>
+    </div>
+
+</section>
+
+{% endblock %}

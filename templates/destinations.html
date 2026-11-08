@@ -1,0 +1,49 @@
+
+{% extends "base.html" %}
+
+{% block title %}Destinations | Voyago{% endblock %}
+
+{% block content %}
+
+<section class="destinations-page">
+
+    <div class="destinations-heading">
+        <span class="section-label">FIND YOUR INSPIRATION</span>
+        <h1>Explore the <span>extraordinary.</span></h1>
+        <p>Discover places worth travelling for and experiences worth remembering.</p>
+    </div>
+
+    <div class="destination-grid">
+
+        {% for name, details in destinations.items() %}
+
+        <article class="destination-card">
+
+            <div class="destination-image destination-{{ name|lower }}">
+                <span class="destination-tag">{{ details.category }}</span>
+                <span class="destination-star">✦</span>
+            </div>
+
+            <div class="destination-info">
+                <h2>{{ name }}</h2>
+                <p>{{ details.description }}</p>
+
+                <div class="destination-footer">
+                    <span>{{ details.places|length }} places to explore</span>
+
+                    <a href="{{ url_for('plan_trip') }}"
+                       class="destination-link">
+                        Plan trip ↗
+                    </a>
+                </div>
+            </div>
+
+        </article>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}
